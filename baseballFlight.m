@@ -12,6 +12,15 @@ rho = 1.2;       %kg/m^3
 A = .0004;       %m^2
 wallDistance = 97;      %m
 groundHeight = 0;       %m
+
+r = .037;
+revmin = -2500;
+s = revmin / 60;
+Cl = .15;
+distancehome = 18.4;
+shoulderheight = 1.47;
+%G = 4 / 3 * 4 * pi ^ 2 * (r ^ 3) * s * p * Vtot)/m;
+
 realAngle = angle * pi / 180;    %takes input angle and converts to radians
 
 %initial conditions for x and y pos and velocities in x and y directions
