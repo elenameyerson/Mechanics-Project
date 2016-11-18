@@ -18,6 +18,8 @@ revmin = -2500; % revolutions per minute
 s = revmin / 60; %convert to rev per second
 Cl = .15; %magnus coefficient for baseball
 shoulderheight = 1.47; %m
+
+
 %G = Cl * 4 / 3 * 4 * pi ^ 2 * (r ^ 3) * s * p * Vtot)/m; 
 % above is the equation for acceleration from magnus affect
 
@@ -33,7 +35,7 @@ v_yi = speed * sin(realAngle);
 %nested function calculates change in position and change in velocity and
 %outputs dx/dt, dy/dt, dvx/dt, and dvy/dt for use in ode45
 
-inputs = [xi, yi, v_xi, v_yi];
+inputs = [xi, yi, v_xi, v_yi,s];
 
     function res = flowFunc(~, inputs)
     
@@ -41,12 +43,18 @@ inputs = [xi, yi, v_xi, v_yi];
         y = inputs(2);
         v_x = inputs(3);
         v_y = inputs(4);
+        w = inputs(5);
         v_tot = (sqrt((v_x^2) + (v_y^2)));
-        accel_x = (-0.5 * Cd * A * rho * ( v_tot^2 ) * (v_x/v_tot)) / m;
-        accel_y = ((-m * g) + (-0.5 * Cd * A * rho * ( v_tot^2 ) * (v_y/v_tot))) / m;
+        Gx = Cl * (4 / 3 * 4 * pi ^ 2 * (r ^ 3) * w * rho * v_x); %this is magnus force with respect to x, it impacts y
+        Gy = Cl * (4 / 3 * 4 * pi ^ 2 * (r ^ 3) * w * rho * v_y); %this is magnus force with respect to y, it impacts x
+        Dragx = (-0.5 * Cd * A * rho * ( v_tot^2 ) * (v_x/v_tot));
+        Dragy = (-0.5 * Cd * A * rho * ( v_tot^2 ) * (v_y/v_tot));
+        accel_x = (Dragx + Gy) / m;
+        accel_y = ((-m * g) + Dragy + Gx ) / m;
         dxdt = v_x;
         dydt = v_y;
-        res = [dxdt; dydt; accel_x; accel_y];
+        changeInW = 0; %w/s ; im leaving it at 0 for now but I may change it if it becomes impactful
+        res = [dxdt; dydt; accel_x; accel_y;changeInW];
 
     end
 
