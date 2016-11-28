@@ -10,11 +10,11 @@ g = 9.8;         %m/s^2
 Cd = 0.3;        %no units
 rho = 1.2;       %kg/m^3
 A = .0004;       %m^2
-plateDistance = 18.4;      %m
+plateDistance = 20.4;      %m
 groundHeight = 0;       %m
 
 r = .037; %radius of ball in meters
-revmin = -2500; % revolutions per minute
+revmin = -2250; % revolutions per minute
 s = revmin / 60; %convert to rev per second
 Cl = .15; %magnus coefficient for baseball
 shoulderheight = 1.47; %m
@@ -78,7 +78,7 @@ clf
  title(['Speed = ', num2str(speed), ', Angle = ', num2str(angle)])
  axes = gca;
  axes.XLim = [0 plateDistance]; % scale x axis from 0 to the wall
- axes.YLim = [0 plateDistance]; % make the axes equal
+ axes.YLim = [0 3]; % make the axes equal
 
 res = R(end,2);
 
