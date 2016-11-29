@@ -1,7 +1,7 @@
 %function that calculates and plots the motion of a baseball hit through
 %the air towards the stands.
 
-function res = baseballFlight(rho, speed)
+function res = baseballPitch(rho, speed)
 
 %global variables
 
@@ -68,7 +68,7 @@ timeStep = [0 10];
 [T, R, te, ye, ie] = ode45(@flowFunc, [0, 10] , inputs, options);
 
 
-clf
+
  %xf = R(:,1);
  %yf = R(:,2);
  %plot(xf, yf);
@@ -89,7 +89,7 @@ res = [ye(1,2),ye(2,2)];
         x_current = inputs(1);
         y_current = inputs(2);
 
-        value = [y_current * (x_current - plateDistance); x_current - catcherDistance];
+        value = [(x_current - plateDistance); x_current - catcherDistance];
         isterminal = [0; 1];
         direction = [0; 0];
     end
