@@ -10,11 +10,12 @@ g = 9.8;         %m/s^2
 Cd = 0.3;        %no units
 rho = 1.2;       %kg/m^3
 A = .0004;       %m^2
-plateDistance = 20.4;      %m
+plateDistance = 18.4;%m
+catcherDistance = 20.4;
 groundHeight = 0;       %m
 
 r = .037; %radius of ball in meters
-revmin = -2250; % revolutions per minute
+revmin = 2250; % revolutions per minute
 s = revmin / 60; %convert to rev per second
 Cl = .15; %magnus coefficient for baseball
 shoulderheight = 1.47; %m
@@ -64,8 +65,9 @@ inputs = [xi, yi, v_xi, v_yi,s];
 options = odeset('Events', @events, 'RelTol', 1e-4);
 
 timeStep = [0 10];
-[T, R] = ode45(@flowFunc, [0, 10] , inputs, options);
+[T, R, te, ye, ie] = ode45(@flowFunc, [0, 10] , inputs, options);
 
+ye
 clf
  xf = R(:,1);
  yf = R(:,2);
@@ -77,7 +79,7 @@ clf
  ylabel('Y Position')
  title(['Speed = ', num2str(speed), ', Angle = ', num2str(angle)])
  axes = gca;
- axes.XLim = [0 plateDistance]; % scale x axis from 0 to the wall
+ axes.XLim = [0 catcherDistance]; % scale x axis from 0 to the wall
  axes.YLim = [0 3]; % make the axes equal
 
 res = R(end,2);
@@ -87,8 +89,8 @@ res = R(end,2);
         x_current = inputs(1);
         y_current = inputs(2);
 
-        value = [x_current - plateDistance; y_current - groundHeight];
-        isterminal = [1; 1];
+        value = [y_current * (x_current - plateDistance); x_current - catcherDistance];
+        isterminal = [0; 1];
         direction = [0; 0];
     end
 
