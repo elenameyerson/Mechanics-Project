@@ -15,7 +15,7 @@ catcherDistance = 20.4;
 groundHeight = 0;       %m
 
 r = .037; %radius of ball in meters
-revmin = -2250; % revolutions per minute
+revmin = 2250; % revolutions per minute
 s = revmin / 60; %convert to rev per second
 Cl = .15; %magnus coefficient for baseball
 shoulderheight = 1.47; %m
@@ -82,7 +82,7 @@ clf
  axes.XLim = [0 catcherDistance]; % scale x axis from 0 to the wall
  axes.YLim = [0 3]; % make the axes equal
     %}
-res = [ye(1,2),ye(2,2)];
+res = [ye(2)(1),];
 
 %events function
     function [value, isterminal, direction] = events(~, inputs)
