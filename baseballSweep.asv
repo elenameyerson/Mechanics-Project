@@ -2,25 +2,34 @@ clf
 clear
 a = 0;
 b = 0;
-for i = 1.007:.01:1.225
+for i = 1.07:.005:1.225
     b = b + 1;
     a = 0;
     
     for j = 32.6:.1:36.6
         
         a= a + 1;
-        res = baseballPitch(i, j)
+        res = baseballPitch(i, j);
        
+        %{
         speed(a) =j;
-        if (res(1) < .56 || res(1) > 1.56 )
-            
-        else
+       
             strike(b,a) = abs(.56-res(1));
-        end
+            
+            density(b) = i;
+       
         %}
+        
     end
     
 end
- 
 
- surf(strike);
+
+%{
+grid off
+ pcolor(density,speed,  strike.');
+xlabel('Air Density (kg/m^3)')
+ylabel('Baseball Speed (m/s)')
+c = colorbar
+c.Label.String = 'Distance from bottom of strike zone (m)'
+%}
