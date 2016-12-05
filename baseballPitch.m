@@ -8,14 +8,14 @@ function res = baseballPitch(rho, speed)
 m = .145;        %kg
 g = 9.8;         %m/s^2
 Cd = 0.3;        %no units
-angle = 1.8;      %kg/m^3
+angle = 1.65;      %kg/m^3
 A = .0004;       %m^2
 plateDistance = 18.4;%m
 catcherDistance = 20.4;
 groundHeight = 0;       %m
 
 r = .037; %radius of ball in meters
-revmin = 2250; % revolutions per minute
+revmin = -2250; % revolutions per minute
 s = revmin / 60; %convert to rev per second
 Cl = .15; %magnus coefficient for baseball
 shoulderheight = 1.47; %m
@@ -72,11 +72,11 @@ timeStep = [0 10];
  xf = R(:,1)
  yf = R(:,2)
  
- plot(xf, yf);
- axis([0,25,0,2.5])
- xlabel('Distance from Mound (m)')
- ylabel('Distance from Ground (m)')
- title('Path of Baseball')
+ %plot(xf, yf);
+ %axis([0,25,0,2.5])
+ %xlabel('Distance from Mound (m)')
+ %ylabel('Distance from Ground (m)')
+ %title('Path of Baseball')
  %legend('At Saint Louis','At Denver')
  %hold on
  %{

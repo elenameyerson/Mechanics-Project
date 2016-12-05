@@ -2,18 +2,29 @@ clf;
 clear;
 a = 0;
 b = 0;
-for i = 0 : tp : 6000
+tp = 50
+tp2 = 1
+for i = 0 : tp : 1700
     a = a+1;
     b =0;
     elevation(a) = i;
-    for j = 0: tp : 30
+    for j = 0 + 273.15 : tp2 : 35 + 273.15
+        b = b+1;
         temp(b) = j;
-        
-        
-        
+        P = ((1+ ((.0065 * elevation(a))/temp(b))) ^ 5.252) / 101300
+        P = 1/P
+        density = P/(287.05*temp(b));
+        velocity(a,b) = 5.31 * density + 28.55; 
     end
 end
-P = (((101325(1-2.25577-(10^-5)*elevation))^5.25588)+(0.4*(6.1078*10^((7.5*(temp-273))/(237.3+(temp-273))))))
-Pv = (0.4*(6.1078*10^((7.5*(temp-273))/(237.3+(temp-273)))))
-density = P/(287.05*temp))*(1-((0.378*Pv)/P))
-velocity = 5.14 * density + 28.3;
+velocity = velocity * 2.236;
+
+temp = temp - 273.15
+temp = (temp * 1.8) + 32
+
+elevation = elevation * 3.28
+pcolor( temp,elevation,velocity)
+xlabel('Tempurature (F)')
+ylabel('Altitude (feet)')
+c = colorbar;
+c.Label.String = 'Velocity (mph)';
