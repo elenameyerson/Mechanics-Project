@@ -37,7 +37,9 @@ fittedY = polyval(coeffs, fittedX);
 % Plot the fitted line
 hold on;
 plot(fittedX, fittedY, 'r-', 'LineWidth', 3);
-
+xlabel('Air Density (kg/m^3)')
+ylabel('Baseball Speed (m/s)')
+ title('Required Speed to Pass Through Bottom of Strike Zone vs Density')
 %{
 grid off
  pcolor(density,speed,  strike.');
