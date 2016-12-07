@@ -23,8 +23,8 @@ temp = temp - 273.15
 temp = (temp * 1.8) + 32
 
 elevation = elevation * 3.28
-pcolor( temp,elevation,velocity)
-xlabel('Tempurature (F)')
-ylabel('Altitude (feet)')
+pcolor( elevation,temp,velocity.')
+ylabel('Tempurature (F)')
+xlabel('Altitude (feet)')
 c = colorbar;
 c.Label.String = 'Velocity (mph)';
